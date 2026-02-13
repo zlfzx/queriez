@@ -4,7 +4,7 @@
     import Separator from "$lib/components/ui/separator/separator.svelte";
     import * as Sidebar from "$lib/components/ui/sidebar";
     import { TabItem } from "$lib/components/ui/tab-item";
-    import { activeSessionId } from "$stores/session-store";
+    import { activeSessionId, removeSession } from "$stores/session-store";
     import { activeTabId, addNewTab, closeTab, setActiveTab, tabs } from "$stores/tab-store";
     import { Plus } from "@lucide/svelte";
     import { NewTab } from "$wailsjs/go/main/App";
@@ -22,6 +22,12 @@
             console.log("New session created:", connect);
             addNewTab(connect.session_id);
         });
+    }
+
+    const closeTabAction = (id: string) => {
+        console.log("Closing tab:", id);
+        closeTab(id);
+        removeSession(id);
     }
 </script>
 
@@ -48,7 +54,7 @@
                             : ""}
                         active={tab.id === $activeTabId}
                         onClick={() => setActiveTab(tab.id)}
-                        onClose={() => closeTab(tab.id)}
+                        onClose={() => closeTabAction(tab.id)}
                     >
                         {tab.title}
                     </TabItem>

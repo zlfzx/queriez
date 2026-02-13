@@ -15,7 +15,7 @@ export const activeTab = derived([tabs, activeTabId], ([$tabs, $activeTabId]) =>
 // add a new tab handler
 export const addNewTab = (
     id: string | null = null, 
-    connectionId: string | null,
+    connectionId: string | null = null,
     poolKey: string | null = null, 
     database: string | null = null
 ) => {
@@ -88,7 +88,8 @@ export const closeTab = (tabId: string) => {
             null;
 
         // Update active tab if needed
-        activeTabId.set(nextActiveTabId);
+        // activeTabId.set(nextActiveTabId);
+        setActiveTab(nextActiveTabId);
     }
 
     // Remove the tab

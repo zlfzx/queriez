@@ -67,3 +67,10 @@ export const updateSessionActiveDB = (sessionId: string, newPoolKey: string, dat
 //         };
 //     });
 // };
+
+export const removeSession = (sessionId: string) => {
+    sessions.update((sess) => {
+        const { [sessionId]: _, ...rest } = sess;
+        return rest;
+    });
+};
