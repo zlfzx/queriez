@@ -1,79 +1,68 @@
 <script lang="ts">
-  import logo from './assets/images/logo-universal.png'
-  import {Greet} from '../wailsjs/go/main/App.js'
+	import NewConnection from "$lib/components/new-connection.svelte";
+	import * as Empty from "$lib/components/ui/empty";
+	import { Database, Server, SquareSplitHorizontal, SquareSplitVertical } from "@lucide/svelte";
+	import "./app.css";
+	import logo from "./assets/images/logo-universal.png";
+	import Layout from "./Layout.svelte";
+	import Button from "$lib/components/ui/button/button.svelte";
+	import * as Resizable from "$lib/components/ui/resizable";
+    import QueryEditor from "$lib/components/query-editor.svelte";
+    import { Toaster } from "$lib/components/ui/sonner";
+    import { openModalConnection } from "./stores/app-store";
+    import { activeTab } from "$stores/tab-store";
+    import ResultTable from "$lib/components/result-table.svelte";
+    import AppMain from "$lib/components/app-main.svelte";
 
-  let resultText: string = "Please enter your name below 👇"
-  let name: string
-
-  function greet(): void {
-    Greet(name).then(result => resultText = result)
-  }
+	let isNewConnectionOpen: boolean = $state(false);
 </script>
 
-<main>
-  <img alt="Wails logo" id="logo" src="{logo}">
-  <div class="result" id="result">{resultText}</div>
-  <div class="input-box" id="input">
-    <input autocomplete="off" bind:value={name} class="input" id="name" type="text"/>
-    <button class="btn" on:click={greet}>Greet</button>
-  </div>
-</main>
+<Layout>
+	<main class="min-h-full">
+		{#if $activeTab}
+		<!-- <Resizable.PaneGroup direction={$activeTab.orientation ?? 'vertical'} class="bg-white">
+			<Resizable.Pane minSize={20} defaultSize={50} class="max-h-full">
+				<QueryEditor />
+			</Resizable.Pane>
+			<Resizable.Handle withHandle class="cursor-row-resize" />
+			<Resizable.Pane minSize={20} defaultSize={50}>
+				<ResultTable />
+			</Resizable.Pane>
+		</Resizable.PaneGroup> -->
+		<AppMain />
+		{:else}
+		<Empty.Root class="min-h-full flex flex-1 items-center justify-center">
+			<Empty.Header>
+				<Empty.Media variant="icon">
+					<Database class="size-12 text-muted-foreground" />
+				</Empty.Media>
+				<Empty.Title>Welcome to Queriez</Empty.Title>
+				<Empty.Description>
+					Get started by creating a new connection and running yout
+					first query.
+				</Empty.Description>
+			</Empty.Header>
+			<Empty.Content>
+				<div class="flex gap-2">
+					<Button
+						class="cursor-pointer"
+						onclick={() => openModalConnection.set(true)}
+						>New Connection</Button
+					>
+					<Button variant="outline" disabled>Import Config</Button>
+				</div>
+			</Empty.Content>
+		</Empty.Root>
+		{/if}
+	</main>
+
+	<NewConnection
+		open={isNewConnectionOpen}
+		onOpenChange={(open: boolean) => (isNewConnectionOpen = open)}
+	/>
+
+	<Toaster richColors expand={true} position="bottom-right" />
+</Layout>
 
 <style>
-
-  #logo {
-    display: block;
-    width: 50%;
-    height: 50%;
-    margin: auto;
-    padding: 10% 0 0;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-origin: content-box;
-  }
-
-  .result {
-    height: 20px;
-    line-height: 20px;
-    margin: 1.5rem auto;
-  }
-
-  .input-box .btn {
-    width: 60px;
-    height: 30px;
-    line-height: 30px;
-    border-radius: 3px;
-    border: none;
-    margin: 0 0 0 20px;
-    padding: 0 8px;
-    cursor: pointer;
-  }
-
-  .input-box .btn:hover {
-    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
-    color: #333333;
-  }
-
-  .input-box .input {
-    border: none;
-    border-radius: 3px;
-    outline: none;
-    height: 30px;
-    line-height: 30px;
-    padding: 0 10px;
-    background-color: rgba(240, 240, 240, 1);
-    -webkit-font-smoothing: antialiased;
-  }
-
-  .input-box .input:hover {
-    border: none;
-    background-color: rgba(255, 255, 255, 1);
-  }
-
-  .input-box .input:focus {
-    border: none;
-    background-color: rgba(255, 255, 255, 1);
-  }
-
 </style>

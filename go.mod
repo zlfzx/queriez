@@ -2,7 +2,18 @@ module queriez
 
 go 1.25.3
 
-require github.com/wailsapp/wails/v2 v2.11.0
+require (
+	github.com/wailsapp/wails/v2 v2.11.0
+	queriez-core v0.0.0-00010101000000-000000000000
+)
+
+require (
+	filippo.io/edwards25519 v1.1.0 // indirect
+	github.com/DATA-DOG/go-sqlmock v1.5.2 // indirect
+	github.com/go-sql-driver/mysql v1.9.3 // indirect
+	github.com/lib/pq v1.11.1 // indirect
+	github.com/mattn/go-sqlite3 v1.14.33 // indirect
+)
 
 require (
 	github.com/bep/debounce v1.2.1 // indirect
@@ -33,5 +44,7 @@ require (
 	golang.org/x/sys v0.39.0 // indirect
 	golang.org/x/text v0.32.0 // indirect
 )
+
+replace queriez-core => ../queriez-core
 
 // replace github.com/wailsapp/wails/v2 v2.11.0 => /Users/zlfzx/go/pkg/mod

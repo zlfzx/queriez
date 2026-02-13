@@ -14,7 +14,14 @@
      */
     "allowJs": true,
     "checkJs": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "paths": {
+      "$lib": ["./src/lib"],
+      "$lib/*": ["./src/lib/*"],
+      "$stores/*": ["./src/stores/*"],
+      "$types/*": ["./src/types/*"],
+      "$wailsjs/*": ["./wailsjs/*"]
+    }
   },
   "include": [
     "src/**/*.d.ts",
