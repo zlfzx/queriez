@@ -22,6 +22,7 @@
             {#each $activeSession.results as result, index }
             <Tabs.Content value="result-{index}" class="h-full flex flex-col">
                 <!-- Content for Result {index + 1} -->
+                {#if !result.error}
                 <div class="flex-1 overflow-x-auto overflow-y-auto">
                     <Table.Root class="min-w-full">
                         <Table.Header class="sticky top-0 bg-background">
@@ -42,16 +43,21 @@
                         </Table.Body>
                     </Table.Root>
                 </div>
+                {:else}
+                <div class="flex-1 flex items-center justify-center p-4">
+                    <p class="text-red-400">{result.error}</p>
+                </div>
+                {/if}
 
                 <div class="flex items-center justify-between px-4 py-2 border-t bg-muted/30 relative h-12">
                     <div class="flex items-center gap-2 text-sm text-muted-foreground">
                         <Tooltip.Provider delayDuration={0}>
                             <Tooltip.Root>
                                 <Tooltip.Trigger class="flex items-center">
-                                    <p class="mr-1">{result.rows.length ?? 0}</p> <TableIcon class="inline size-4" />
+                                    <p class="mr-1">{result.rows ?  result.rows.length : 0}</p> <TableIcon class="inline size-4" />
                                 </Tooltip.Trigger>
                                 <Tooltip.Content>
-                                    <p>Return {result.rows.length ?? 0} rows</p>
+                                    <p>Return {result.rows ?  result.rows.length : 0} rows</p>
                                 </Tooltip.Content>
                             </Tooltip.Root>
                         </Tooltip.Provider>
