@@ -31,7 +31,7 @@
     }
 </script>
 
-<Sidebar.Provider>
+<Sidebar.Provider class="text-xs">
     <AppSidebar />
     <Sidebar.Inset class="overflow-x-hidden">
         <header

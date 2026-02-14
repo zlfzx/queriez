@@ -69,9 +69,6 @@
                                 >{connection.name}</Select.Item
                             >
                         {/each}
-                        <!-- <Select.Item value="light">Light</Select.Item>
-                    <Select.Item value="dark">Dark</Select.Item>
-                    <Select.Item value="system">System</Select.Item> -->
                     </Select.Content>
                 </Select.Root>
 
@@ -94,9 +91,6 @@
                                 >{database.name}</Select.Item
                             >
                         {/each}
-                        <!-- <Select.Item value="light">Light</Select.Item>
-                    <Select.Item value="dark">Dark</Select.Item>
-                    <Select.Item value="system">System</Select.Item> -->
                     </Select.Content>
                 </Select.Root>
             </div>

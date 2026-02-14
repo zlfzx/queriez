@@ -1,17 +1,14 @@
 <script lang="ts">
 	import NewConnection from "$lib/components/new-connection.svelte";
 	import * as Empty from "$lib/components/ui/empty";
-	import { Database, Server, SquareSplitHorizontal, SquareSplitVertical } from "@lucide/svelte";
+	import { Database } from "@lucide/svelte";
 	import "./app.css";
 	import logo from "./assets/images/logo-universal.png";
 	import Layout from "./Layout.svelte";
 	import Button from "$lib/components/ui/button/button.svelte";
-	import * as Resizable from "$lib/components/ui/resizable";
-    import QueryEditor from "$lib/components/query-editor.svelte";
     import { Toaster } from "$lib/components/ui/sonner";
     import { openModalConnection } from "./stores/app-store";
     import { activeTab } from "$stores/tab-store";
-    import ResultTable from "$lib/components/result-table.svelte";
     import AppMain from "$lib/components/app-main.svelte";
 
 	let isNewConnectionOpen: boolean = $state(false);
@@ -20,15 +17,6 @@
 <Layout>
 	<main class="min-h-full">
 		{#if $activeTab}
-		<!-- <Resizable.PaneGroup direction={$activeTab.orientation ?? 'vertical'} class="bg-white">
-			<Resizable.Pane minSize={20} defaultSize={50} class="max-h-full">
-				<QueryEditor />
-			</Resizable.Pane>
-			<Resizable.Handle withHandle class="cursor-row-resize" />
-			<Resizable.Pane minSize={20} defaultSize={50}>
-				<ResultTable />
-			</Resizable.Pane>
-		</Resizable.PaneGroup> -->
 		<AppMain />
 		{:else}
 		<Empty.Root class="min-h-full flex flex-1 items-center justify-center">
