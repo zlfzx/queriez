@@ -32,6 +32,12 @@
     "vite": "^7.3.0"
   },
   "dependencies": {
+    "@codemirror/autocomplete": "^6.18.7",
+    "@codemirror/lang-sql": "^6.10.0",
+    "@codemirror/language": "^6.12.1",
+    "@codemirror/state": "^6.5.4",
+    "@codemirror/view": "^6.39.14",
+    "codemirror": "^6.0.2",
     "svelte-virtuallists": "^1.4.2"
   }
 }
