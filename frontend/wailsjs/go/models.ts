@@ -17,6 +17,7 @@ export namespace model {
 	    pool_key: string;
 	    database: string;
 	    databases: Database[];
+	    tables?: Record<string, Array<Table>>;
 	
 	    static createFrom(source: any = {}) {
 	        return new ConnectResult(source);
@@ -28,6 +29,7 @@ export namespace model {
 	        this.pool_key = source["pool_key"];
 	        this.database = source["database"];
 	        this.databases = this.convertValues(source["databases"], Database);
+	        this.tables = this.convertValues(source["tables"], Array<Table>, true);
 	    }
 	
 		convertValues(a: any, classs: any, asMap: boolean = false): any {
@@ -69,6 +71,20 @@ export namespace model {
 	        this.last_insert_id = source["last_insert_id"];
 	        this.execution_time = source["execution_time"];
 	        this.error = source["error"];
+	    }
+	}
+	export class Table {
+	    name: string;
+	    type: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new Table(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.name = source["name"];
+	        this.type = source["type"];
 	    }
 	}
 

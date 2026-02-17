@@ -21,7 +21,7 @@ export interface Connection {
 
 export interface Database {
     name: string;
-    tables: string[];
+    tables: model.Table[];
 }
 
 export interface QueryResult {

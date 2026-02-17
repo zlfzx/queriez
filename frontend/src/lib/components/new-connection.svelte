@@ -47,9 +47,11 @@
                 };
 
                 connect.databases.forEach((database) => {
+                    const tables = connect.tables?.[database.name] ?? [];
+
                     const db: Database = {
                         name: database.name,
-                        tables: [],
+                        tables: tables,
                     };
                     connection.databases.push(db);
                 });

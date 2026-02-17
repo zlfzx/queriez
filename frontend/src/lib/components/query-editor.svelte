@@ -54,7 +54,8 @@
         const database = connection.databases.find(
             (db) => db.name === session.database,
         );
-        return database?.tables ?? [];
+        const tables = database?.tables ?? [];
+        return tables.map((table) => table.name);
     };
     const editorTheme = EditorView.theme({
         "&": { height: "100%" },
